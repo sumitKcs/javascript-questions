@@ -44,26 +44,22 @@
 //     return maxHeight;
 //     }
 
-
 //Iterative Solution with Queue - BFS
 
 function getHeight(root) {
+  if (!root) return 0;
 
-    if(!root) return 0
+  let maxHeight = 0;
+  const queue = [[root, 1]];
 
-    let maxHeight=0;
-    const queue = [[root, 1]]
-   
+  while (queue.length) {
+    const [element, height] = queue.shift();
+    maxHeight = Math.max(height, maxHeight);
 
-    while(queue.length) {
-        const [element, height] = queue.shift()
-        maxHeight = Math.max(height, maxHeight)
+    for (const child of element.children) queue.push([child, height + 1]);
+  }
 
-        for(const child of element.children) queue.push([child, height+1])
-    }
-
-    return maxHeight
-
+  return maxHeight;
 }
 
-module.exports = getHeight
+module.exports = getHeight;
